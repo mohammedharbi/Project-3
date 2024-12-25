@@ -71,6 +71,7 @@ public class AccountService {
 
         if (!account.getCustomer().getId().equals(user.getId())) {throw new ApiException("customer doesn't own this account");}
 
+        if(amount > account.getBalance()){throw new ApiException("amount exceeds balance");}
         account.setBalance(account.getBalance() - amount);
         accountRepository.save(account);
     }
@@ -90,6 +91,7 @@ public class AccountService {
 
         if (!account.getCustomer().getId().equals(user.getId())) {throw new ApiException("customer doesn't own this account");}
 
+        if(amount > account.getBalance()){throw new ApiException("amount exceeds balance");}
         account.setBalance(account.getBalance() - amount);
         account2.setBalance(account2.getBalance() + amount);
         accountRepository.save(account);
